@@ -9,7 +9,7 @@ PREFETCHERS=(no)
 MEMORIES=(2200 4400 6600 8800 11000 13200 15400 17600 19800 22000) # Kron
 MAX_MEMORY=${MEMORIES[-1]}
 BENCHS=(pr) 
-TEST_SYSTEMS=(mage)
+TEST_SYSTEMS=(magelibos)
 for B in ${BENCHS[@]}; do
     # Different bench in different file
     for P in ${PREFETCHERS[@]}; do

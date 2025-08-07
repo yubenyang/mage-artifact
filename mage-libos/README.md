@@ -54,7 +54,7 @@ On compute node:
 ```
 This script will compile gapbs, run it and generate one column 
 starting with `magelibos 48 no` in 
-`~/benchmark-out-ae/gapbs/gapbs-pr-kron.txt`
+`~/benchmark-out-ae/gapbs/gapbs.txt`
 
 ### Figure 9 (b)
 On compute node:
