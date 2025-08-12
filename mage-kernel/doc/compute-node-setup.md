@@ -3,6 +3,15 @@
 **Mage is a research prototype. The Compute Node Kernel is unstable!**
 **We recommend setting the Compute Node up inside a virtual machine**. 
 
+**SOSP Evaluators:** We have completed these steps for you. 
+The compute node is on the `FBS_client_yash` VM, on RS3 server 4. 
+You can access it via the convenient alias: `ssh fbsc`. 
+Please SSH into that node, confirm that the "mage-artifact" repo is on 
+this current git branch, and you're ready to go!
+(FAQ: If you can't start the VM because of a "device busy" message, please
+uninstall OFED via `sudo ofed_uninstall.sh`, restart the host machine, then
+continue). 
+
 ## Hardware Requirements
 
 See the [main README](../README.md). 
