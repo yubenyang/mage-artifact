@@ -1,1 +1,0 @@
-/home/yupan/mage-artifact/mage-libos/qemu/tests/plugin/Makefile
