@@ -2,7 +2,7 @@
 source config.sh
 source scripts/config-bench.sh
 
-CPUS=(24)
+CPUS=(12)
 TRY=1
 TRIES=$(seq 1 ${TRY})
 PREFETCHERS=(no)

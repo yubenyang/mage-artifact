@@ -25,8 +25,8 @@ for S in ${TEST_SYSTEMS[@]}; do
                 RESULT_LAT=0
                 RESULT_TPUT=0
                 for T in ${TRIES[@]}; do
-                    TMP_LAT=`grep "^tput:" $DIR/microbench-selective-4-pipelined-nosync-patr-static-fifo-$M-$P-$C-$T-$STRIDE.txt | awk '{print $2}'`
-                    TMP_TPUT=`grep "p99-latency:" $DIR/microbench-selective-4-pipelined-nosync-patr-static-fifo-$M-$P-$C-$T-$STRIDE.txt | awk '{print $2}'`
+                    TMP_TPUT=`grep "^tput:" $DIR/microbench-selective-4-pipelined-nosync-patr-static-fifo-$M-$P-$C-$T-$STRIDE.txt | awk '{print $2}'`
+                    TMP_LAT=`grep "p99-latency:" $DIR/microbench-selective-4-pipelined-nosync-patr-static-fifo-$M-$P-$C-$T-$STRIDE.txt | awk '{print $2}'`
                     echo $DIR 
                     echo $TMP_LAT
                     echo $TMP_TPUT

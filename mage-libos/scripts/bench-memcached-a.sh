@@ -21,9 +21,10 @@ fi
 
 sed -i "s/#define SLEEP_TIME .*/#define SLEEP_TIME 0/" $MEMCACHED_PATH/src/test_config.h
 ./clean-app.sh
+rm ${ROOT_PATH}/dilos/apps/memcached/memcached
 ./build.sh memcached
 
-CORES=24
+CORES=12
 MEMORIES=(20480 18432 16384 14336 12288 10240 8192 8000)
 export SLEEP_TIMES=(200 100 80 50 20 5 0 0)
 
@@ -46,6 +47,7 @@ for TRY in ${TRIES[@]}; do
                         
                     sed -i "s/#define SLEEP_TIME .*/#define SLEEP_TIME $S/" $MEMCACHED_PATH/src/test_config.h
                     ./clean-app.sh
+                    rm ${ROOT_PATH}/dilos/apps/memcached/memcached
                     ./build.sh memcached
 
 

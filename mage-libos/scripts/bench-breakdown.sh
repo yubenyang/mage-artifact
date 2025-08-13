@@ -154,7 +154,7 @@ function run_iteration_sync() {
         install_timeout 300 qemu-system-x86_64
         sleep 1
         D=$((C-1))
-        MAX_RECLAIM_THREADS=1 SYNC_RECLAIM=normal  TLB_FLUSH_MODE=${T}  LRU_MODE=${L} MEMORY=$(expr $M + $MEM_EXTRA_MB)M PREFETCHER=$P DISK=${KRON}.raw ./run.sh --env=GOMP_CPU_AFFINITY=0-$D --env=OMP_NUM_THREADS=$C /${A} ${ALGO_PARAMS[$A]} -n${GRAPH_TRIAL} | tee ${FILE_OUT}
+        MAX_RECLAIM_THREADS=2 SYNC_RECLAIM=normal  TLB_FLUSH_MODE=${T}  LRU_MODE=${L} MEMORY=$(expr $M + $MEM_EXTRA_MB)M PREFETCHER=$P DISK=${KRON}.raw ./run.sh --env=GOMP_CPU_AFFINITY=0-$D --env=OMP_NUM_THREADS=$C /${A} ${ALGO_PARAMS[$A]} -n${GRAPH_TRIAL} | tee ${FILE_OUT}
         stop_timeout
     }
     run_sync

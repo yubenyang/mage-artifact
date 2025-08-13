@@ -25,7 +25,7 @@ for B in ${BENCHS[@]}; do
                     RESULT=0
                     for T in ${TRIES[@]}; do
                         #TMP=`grep Average $DIR/gapbs-$B-$M-$P-$C-$T.txt | awk '{print $3}'
-                        TMP=`grep Average $DIR/gapbs-kron-nosync-pipelined-4-selective-patr-static_fifo-$B-$M-$P-$C-$T.txt | awk '{print $3}'`
+                        TMP=`grep Average $DIR/gapbs-kron-nosync-pipelined-4-selective-64-batch-static_lru-$B-$M-$P-$C-$T.txt | awk '{print $3}'`
                         echo $DIR 
                         echo $TMP
                         if [[ -z $TMP ]]; then
