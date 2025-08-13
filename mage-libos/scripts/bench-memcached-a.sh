@@ -25,8 +25,8 @@ rm ${ROOT_PATH}/dilos/apps/memcached/memcached
 ./build.sh memcached
 
 CORES=12
-MEMORIES=(20480 18432 16384 14336 12288 10240 8192 8000)
-export SLEEP_TIMES=(200 100 80 50 20 5 0 0)
+MEMORIES=(20480 18432 16384 14336 12288 10240 8000 7000 6000)
+export SLEEP_TIMES=(30 25 15 12 10 5 0 0 0)
 
 ./remote.sh down
 ./remote.sh clean
