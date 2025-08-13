@@ -1,0 +1,4 @@
+memcached
+*.o
+.vscode/*
+*.swo
