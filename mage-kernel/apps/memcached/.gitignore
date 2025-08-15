@@ -1,3 +1,5 @@
 memcached
 *.o
 bench_results
+usr.manifest
+bootfs.manifest
