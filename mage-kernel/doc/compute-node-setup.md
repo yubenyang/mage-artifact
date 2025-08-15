@@ -118,3 +118,23 @@ third-party library by Mellanox (now acquired by NVIDIA).
 Reboot the VM again. 
 You should see "ofed" printed in the kernel's log after boot (check via `dmesg
 | grep -i ofed`). 
+
+### Kernel Parameter Setup
+
+Mage-Linux allocates its local memory (used for far-memory applications) as one
+big block of physically-contiguous addresses. 
+This requires reserving a large block of memory at boot, using Linux's CMA (contiguous memory allocator).  
+Add the `cma=22G` parameter to the Linux kernel command line (usually accessible via `/etc/default/grub`)
+to allocate 22 GiB of memory for Mage-Linux to use. 
+This isn't _sufficient_ for Mage-Linux to use the memory -- but it is a
+necessary prerequisite to prevent it from OOMing during cluster setup. 
+
+## Application Setup
+
+The current version of Mage-Linux doesn't support dynamically linked libraries. 
+Please make sure all of your programs are statically linked (`dlopen` calls are allowed). 
+Remember that even the "built in" libraries need to be statically compiled; 
+this can cause problems when running OpenMP applications, since many distributions don't 
+package a static-library version of `libgomp`! (which is needed for OpenMP). 
+You'll have to compile and install libgomp yourself. 
+SOSP evaluators: we have already done this in the test environments. 

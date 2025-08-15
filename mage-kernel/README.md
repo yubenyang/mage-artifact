@@ -52,3 +52,4 @@ The installation procedure contains 5 steps:
 ## Running Programs
 
 - [Reproducing Paper Evaluations](doc/reproducing-paper-evals.md)
+- [Running Arbitrary Programs](doc/running-arbitrary-programs.md)
