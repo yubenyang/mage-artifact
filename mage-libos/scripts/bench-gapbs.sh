@@ -71,7 +71,7 @@ for A in ${ALGO[@]}; do
 
                                 #FILE_OUT="${OUT_PATH}/gapbs-sync-pipelined-4-$T-$L-$A-$M-$P-$C-$TRY.txt"
                                 echo ${FILE_OUT}
-                                install_timeout 3000 qemu-system-x86_64
+                                install_timeout 300 qemu-system-x86_64
                                 sleep 1
                                 D=$((C-1))
                                 RDMA_MODE=selective MAX_RECLAIM_THREADS=4 ASYNC_RECLAIM=pipelined SYNC_RECLAIM=no TLB_FLUSH_MODE=${T} LRU_MODE=${L} MEMORY=$(expr $M + $MEM_EXTRA_MB)M PREFETCHER=$P DISK=${KRON}.raw ./run.sh --env=GOMP_CPU_AFFINITY=0-$D --env=OMP_NUM_THREADS=$C /${A} ${ALGO_PARAMS[$A]} -n${GRAPH_TRIAL} | tee ${FILE_OUT}
