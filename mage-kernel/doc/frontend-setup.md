@@ -25,7 +25,7 @@ See the [main README](../README.md).
 
 ### Repo Setup
 
-Clone this repo into the VM. 
+Clone this repo onto the Compute Node VM's host machine. 
 
 Set the environment variable `MIND_ROOT` to point to the root directory of
 Mage-Linux tree (aka: the directory whose README starts with "Welcome to
