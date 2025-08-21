@@ -12,7 +12,7 @@ apt install -y python3-pip build-essential gdb bridge-utils numactl \
     libnl-route-3-dev chrpath dpatch \
     flex tcl 
 
-apt install -y libboost-all-dev
+#apt install -y libboost-all-dev
 apt install -y unzip liblua5.3-dev lua5.3 libssl-dev pax-utils libyaml-cpp-dev \
     openjdk-11-jdk-headless libedit-dev libglib2.0-dev libfdt-dev libpixman-1-dev \
     zlib1g-dev libaio-dev libsysfs-dev \
