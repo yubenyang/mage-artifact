@@ -1701,7 +1701,7 @@ void l1::unfill(bool is_from_fill_thread)
     SCOPE_LOCK(preempt_lock);
     auto& pbuf = get_l1();
     trace_l1_unfill(pbuf.nr, page_batch::nr_pages + pbuf.max / 2);
-    if (pbuf.nr > page_batch::nr_pages + pbuf.max / 2) {
+    if (pbuf.nr > pbuf.max / 2) {
 
         auto* pb = static_cast<page_batch*>(pbuf.top());
         for (size_t i = 0 ; i < page_batch::nr_pages; i++) {
