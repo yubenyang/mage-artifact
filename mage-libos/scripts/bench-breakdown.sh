@@ -16,7 +16,7 @@ declare -A ALGO_PARAMS
 ALGO_PARAMS[pr]=" -f /mnt/kron.sg -i1000 -t1e-4"
 ALGO_PARAMS[bc]=" -f /mnt/twitter.sg -i1 "
 
-ENABLE_PARSE=n
+ENABLE_PARSE=y
 
 FULL_CLEAN=n
 
@@ -44,12 +44,14 @@ function prepare_batch(){
 
 function prepare_no_l2(){
     sed -i "s/static constexpr size_t max = [0-9]\+;/static constexpr size_t max = 64;/g" ${ROOT_PATH}/dilos/core/mempool.cc
+    sed -i "s/_max(sched::cpus.size() \* (l1::max \/ page_batch::nr_pages))/_max(sched::cpus.size())/g" ${ROOT_PATH}/dilos/core/mempool.cc
     ./clean-app.sh
     ./build.sh gapbs
 }
 
 function unprepare_no_l2(){
     sed -i "s/static constexpr size_t max = [0-9]\+;/static constexpr size_t max = 512;/g" ${ROOT_PATH}/dilos/core/mempool.cc
+    sed -i "s/_max(sched::cpus.size())/_max(sched::cpus.size() \* (l1::max \/ page_batch::nr_pages))/g" ${ROOT_PATH}/dilos/core/mempool.cc
     ./clean-app.sh
     ./build.sh gapbs
 }
@@ -61,14 +63,16 @@ function prepare_no_lru(){
 }
 
 function prepare_sync(){
-    sed -i "s/constexpr size_t max_tokens = 64;/constexpr size_t max_tokens = 16;/g" ${ROOT_PATH}/dilos/core-ddc/tlb.hh
-    sed -i "s/constexpr size_t current_max_evict = [0-9]\+;/constexpr size_t current_max_evict = 64;/g" ${ROOT_PATH}/dilos/include/ddc/remote.hh
+    sed -i "s/static constexpr size_t max = [0-9]\+;/static constexpr size_t max = 512;/g" ${ROOT_PATH}/dilos/core/mempool.cc
+    sed -i "s/_max(sched::cpus.size())/_max(sched::cpus.size() \* (l1::max \/ page_batch::nr_pages))/g" ${ROOT_PATH}/dilos/core/mempool.cc
+    sed -i "s/constexpr size_t max_tokens = 64;/constexpr size_t max_tokens = 8;/g" ${ROOT_PATH}/dilos/core-ddc/tlb.hh
+    sed -i "s/constexpr size_t current_max_evict = [0-9]\+;/constexpr size_t current_max_evict = 32;/g" ${ROOT_PATH}/dilos/include/ddc/remote.hh
     ./clean-app.sh
     ./build.sh gapbs
 }
 
 function unprepare_sync(){
-    sed -i "s/constexpr size_t max_tokens = 16;/constexpr size_t max_tokens = 64;/g" ${ROOT_PATH}/dilos/core-ddc/tlb.hh
+    sed -i "s/constexpr size_t max_tokens = 8;/constexpr size_t max_tokens = 64;/g" ${ROOT_PATH}/dilos/core-ddc/tlb.hh
     sed -i "s/constexpr size_t current_max_evict = [0-9]\+;/constexpr size_t current_max_evict = 256;/g" ${ROOT_PATH}/dilos/include/ddc/remote.hh
     ./clean-app.sh
     ./build.sh gapbs
@@ -159,7 +163,11 @@ function run_iteration_sync() {
     }
     run_sync
     retry_count=0
-    while ! grep -q "Average" "${FILE_OUT}" && [ $retry_count -lt 10 ]; do
+    most_tries=10
+    if [[ $M -le 4400 ]]; then
+        most_tries=20
+    fi
+    while ! grep -q "Average" "${FILE_OUT}" && [ $retry_count -lt $most_tries ]; do
         run_sync
         retry_count=$((retry_count+1))
     done
@@ -172,17 +180,17 @@ done
 
 prepare_no_l2
 for M in ${MEMORIES[@]}; do
-    run_iteration_async pr 1 no static_fifo batch $M 48 yes nol2
+    run_iteration_async pr 1 no static_fifo batch $M 48 no nol2
 done
 
 prepare_no_lru
 for M in ${MEMORIES[@]}; do
-    run_iteration_async pr 1 no static_lru batch $M 48 yes nolru
+    run_iteration_async pr 1 no static_lru batch $M 48 no nolru
 done
 
 prepare_sync
 for M in ${MEMORIES[@]}; do
-    run_iteration_sync pr 1 no static_lru batch $M 48 yes nopipelined
+    run_iteration_sync pr 1 no static_lru batch $M 48 no nopipelined
 done
 
 unprepare_sync

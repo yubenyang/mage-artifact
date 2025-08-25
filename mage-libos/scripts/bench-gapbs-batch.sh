@@ -8,12 +8,7 @@ set -euo
 echo $MEM_EXTRA_MB
 
 OUT_PATH="$OUT_PATH/gapbs/${DATE}"
-#MEMORIES=(13000 9750 6500 3250)
-#MEMORIES=(13000 11700 10400 9100 7800 6500 5200 3900 2600) #twitter
 MEMORIES=(22000 19800 17600 15400 13200 11000 8800 6600 4400 2200) #kron
-#MEMORIES=(8800 6600 4400 2200) #kron
-#MEMORIES=(14000 12600 11200 9800 8400 7000 5600 4200 2800 1400)
-#MEMORIES=(${FULL_MB})
 PREFETCHERS=(no)
 ALGO=(pr)
 GRAPH_TRIAL=3
@@ -98,6 +93,21 @@ for BATCH in ${BATCH_SIZE[@]}; do
     done
 done
 
+function prepare_sync(){
+    sed -i "s/constexpr size_t max_tokens = 64;/constexpr size_t max_tokens = 64;/g" ${ROOT_PATH}/dilos/core-ddc/tlb.hh
+    sed -i "s/constexpr size_t current_max_evict = [0-9]\+;/constexpr size_t current_max_evict = 32;/g" ${ROOT_PATH}/dilos/include/ddc/remote.hh
+    ./clean-app.sh
+    ./build.sh gapbs
+}
+
+function unprepare_sync(){
+    sed -i "s/constexpr size_t max_tokens = 64;/constexpr size_t max_tokens = 64;/g" ${ROOT_PATH}/dilos/core-ddc/tlb.hh
+    sed -i "s/constexpr size_t current_max_evict = [0-9]\+;/constexpr size_t current_max_evict = 256;/g" ${ROOT_PATH}/dilos/include/ddc/remote.hh
+    ./clean-app.sh
+    ./build.sh gapbs
+}
+
+prepare_sync
 LRU_MODES=(static_lru)
 TLB_FLUSH_MODES=(batch)
 for A in ${ALGO[@]}; do
@@ -146,6 +156,7 @@ echo $MYPID
 if [[ -n $MYPID ]]; then
     kill -9 $MYPID
 fi
+unprepare_sync
 sed -i "s/constexpr size_t current_max_evict = [0-9]\+;/constexpr size_t current_max_evict = 256;/g" ${ROOT_PATH}/dilos/include/ddc/remote.hh
 
 echo "Result in: "
