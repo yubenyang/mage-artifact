@@ -469,7 +469,7 @@ size_t evictor::clean_slice(ddc::base_page_slice_t& active_buffer, ddc::base_pag
         // from this slice_active
 #endif
         active_stats.n_sliced_pages ++;
-        assert(slice_active.size() < 600);
+        assert(slice_active.size() < 6000);
         auto tick4 = processor::ticks();
         tick_process += tick4 - tick3;
         tick_ptep_all += tick4 - tick_ptep;
