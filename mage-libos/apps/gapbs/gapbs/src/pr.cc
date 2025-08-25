@@ -152,9 +152,9 @@ int main(int argc, char* argv[]) {
     return PRVerifier(g, scores, cli.tolerance());
   };
   BenchmarkKernel(cli, g, PRBound, PrintTopScores, VerifierBound);
-  size_t maj = getMajor();
-  size_t fault_time = getFaultTime();
-  printf("Major: %lu\n", maj);
-  printf("Fault time: %lu\n", fault_time);
+  // size_t maj = getMajor();
+  // size_t fault_time = getFaultTime();
+  // printf("Major: %lu\n", maj);
+  // printf("Fault time: %lu\n", fault_time);
   return 0;
 }
