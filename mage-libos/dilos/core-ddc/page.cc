@@ -91,6 +91,9 @@ size_t page_list_t::get_active_list(size_t hint_list, bool slice, bool reclaim, 
     // 4. size-based LB
     
     // NOTE: Does it work as well in the bootup phase?
+    if (max_queues == 1) {
+        return 0;
+    }
     auto cpu_id = sched::cpu::current() -> id;
     if (opt_lru_mode == "static_lru"){
         hint_list = cpu_id % max_queues;
@@ -177,6 +180,9 @@ size_t page_list_t::get_active_list(size_t hint_list, bool slice, bool reclaim, 
 
 size_t page_list_t::get_clean_list(size_t hint_list, bool slice, bool reclaim){
     // Only works for 2 Qs for now
+    if (max_queues == 1) {
+        return 0;
+    }
     hint_list = hint_list / (ddc::max_cpu / max_queues + 1);
     assert(hint_list < max_queues);
     return hint_list;
