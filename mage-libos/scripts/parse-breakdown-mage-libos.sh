@@ -24,8 +24,8 @@ function parse_async(){
     local SUFFIX=$8
     for M in ${MEMORIES[@]}; do
         RESULT=0
-        for T in ${TRIES[@]}; do
-            TMP=`grep Average $DIR/gapbs-kron-nosync-pipelined-4-selective-${BATCH}-$T-$L-$A-$M-$P-$C-$T-${SUFFIX}.txt | awk '{print $3}'`
+        for TR in ${TRIES[@]}; do
+            TMP=`grep Average $DIR/gapbs-kron-nosync-pipelined-4-selective-${BATCH}-$T-$L-$A-$M-$P-$C-$TR-${SUFFIX}.txt | awk '{print $3}'`
             echo $DIR 
             echo $TMP
             if [[ -z $TMP ]]; then
@@ -53,8 +53,8 @@ function parse_sync(){
     local SUFFIX=$8
     for M in ${MEMORIES[@]}; do
         RESULT=0
-        for T in ${TRIES[@]}; do
-            TMP=`grep Average $DIR/gapbs-kron-sync-pipelined-1-$T-$L-$A-$M-$P-$C-$T-${SUFFIX}.txt | awk '{print $3}'`
+        for TR in ${TRIES[@]}; do
+            TMP=`grep Average $DIR/gapbs-kron-sync-pipelined-1-$T-$L-$A-$M-$P-$C-$TR-${SUFFIX}.txt | awk '{print $3}'`
             echo $DIR 
             echo $TMP
             if [[ -z $TMP ]]; then
