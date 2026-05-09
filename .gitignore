@@ -1,3 +1,5 @@
 **/.vscode/
 *.tar.zst
 *.qcow2
+*stderr
+*stdout
