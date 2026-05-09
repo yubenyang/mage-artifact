@@ -1,0 +1,13 @@
+apt update
+apt install -y \
+  qemu-system-x86 \
+  qemu-utils \
+  qemu-kvm \
+  libvirt-daemon-system \
+  libvirt-clients \
+  virtinst \
+  pciutils \
+  wget \
+  numactl
+
+echo 'none /dev/hugepages-1G hugetlbfs pagesize=1G 0 0' | sudo tee -a /etc/fstab
