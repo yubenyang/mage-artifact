@@ -125,7 +125,7 @@ all.config
 *.kdev4
 
 # Deleopment for QEMU
-initrd.*
+#initrd.*
 *.code-workspace
 
 compile_commands.json

@@ -2,7 +2,8 @@
 set -euo pipefail
 
 VM_MEMORY="${1:-65536}"
-IMAGE_PATH=/home/yuyang/mage-artifact/mage-compute.qcow2
+IMAGE_PATH=/tmp/mage-compute.qcow2
+cp /home/yuyang/mage-artifact/mage-compute.qcow2 "$IMAGE_PATH"
 VM_NAME=mage-compute
 RDMA_NODEDEV=pci_0000_3b_00_0
 
