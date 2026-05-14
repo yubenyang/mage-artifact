@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+sudo apt -y update
 sudo apt install -y git vim
 git clone https://github.com/yubenyang/mage-artifact.git
 
