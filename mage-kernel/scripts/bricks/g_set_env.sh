@@ -1,28 +1,28 @@
 # This script acts as a "config file" for the cluster setup.
 
 # MIND_ROOT should be set in zshrc anyways.
-export MIND_ROOT="${MIND_ROOT:-$HOME/mage-artifact/mage-kernel}"
+#export MIND_ROOT="${MIND_ROOT:-$HOME/mage-artifact/mage-kernel}"
 
 # CLUSTER SETUP
-cn_vm_name=FBS_client_yash
+cn_vm_name=mage-compute
 
-cn_vm_hostname=fbs-client
-mn_vm_hostname=rs3labsrv5
+cn_vm_hostname=mage-compute
+mn_vm_hostname=mage-memory
 
-cn_control_sshname=fbsc
-cn_control_ip=192.168.122.4
+cn_control_sshname=mage-cn
+cn_control_ip=192.168.122.50
 cn_nic='ib0'
-cn_mac='b8:3f:d2:ac:a0:06'
+cn_mac='' # RoCE only; unused when using_roce='false'
 cn_data_ip='10.10.10.201'
 
-mn_control_sshname=epfl5
-mn_control_ip='10.90.46.65'
-mn_nic='ibp49s0f0'
-mn_mac='e8:eb:d3:36:f3:7e'
+mn_control_sshname=mage-mn
+mn_control_ip='192.168.122.51'
+mn_nic='ib0'
+mn_mac='' # RoCE only; unused when using_roce='false'
 mn_data_ip='10.10.10.202'
 mn_nic_numa=0
 
-frontend_sshname='epfl4'
+frontend_sshname='root@192.168.122.1'
 frontend_ip=192.168.122.1
 
 using_roce='false'
