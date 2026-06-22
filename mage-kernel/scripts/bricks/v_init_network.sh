@@ -24,6 +24,7 @@ else
         exit 1
 fi
 
+sudo ip link set $nic mtu 2044
 sudo ip link set $nic up 
 
 if [[ "$using_roce" = 'true' ]]; then
@@ -43,7 +44,7 @@ if [[ "$using_roce" = 'true' ]]; then
 	# ARP entry for other node. Not needed for IB. 
 	sudo ip neigh replace $raddr dev $nic lladdr $rmac nud permanent
 else 
-	sudo systemctl start opensm
+	#sudo systemctl start opensm
 	sleep 3
 fi
 

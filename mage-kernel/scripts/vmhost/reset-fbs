@@ -104,8 +104,8 @@ sleep 8
 echo "Disabling PATR"
 ssh $cn_control_sshname '$MIND_ROOT/scripts/cn/disable-patr'
 
-echo "Disabling CPU frequency scaling."
-for cpu in {2..55}; do 
-	sudo cpufreq-set -c $cpu --min 2.5GHz --max 2.6Ghz -g performance
-done
-echo "CPUs should now be running at $(cat /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq) kilohertz"
+#echo "Disabling CPU frequency scaling."
+#for cpu in {2..55}; do 
+#	sudo cpufreq-set -c $cpu --min 2.5GHz --max 2.6Ghz -g performance
+#done
+#echo "CPUs should now be running at $(cat /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq) kilohertz"

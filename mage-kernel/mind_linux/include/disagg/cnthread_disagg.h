@@ -22,7 +22,7 @@
 // Manually Set Parameters
 
 // y: keep this in sync with `network_fit_disagg.h`!
-#define DISAGG_NUM_CORES 54
+#define DISAGG_NUM_CORES 22
 #define DISAGG_TCP_HANDLER_CPU 0
 #define DISAGG_FIRST_ASSIGNABLE_CPU 2
 #define DISAGG_LAST_ASSIGNABLE_CPU (DISAGG_NUM_CORES - 1)

@@ -36,11 +36,11 @@ function run-test () {
 }
 
 local cn=4
-local fh=48
+local fh=16
 local bs=256
 
 # full 
-lmems_mib=(18000 15000 13500 12000 10500 9000 7500 6000 4500 3000 1500)
+lmems_mib=(18000 15000 13500 12000 10500)
 for lmem_mib in $lmems_mib; do 
 	set-params $cn $bs $lmem_mib
 

@@ -23,7 +23,7 @@ date > frontend.log
 
 # Remember, the frontend has no way of communicating with the MN. But that's
 # OK; we set up a _dummy_ mn, so the frontend should ignore the $mn_data_ip arg.
-nohup unbuffer taskset -c 0 build/tna_disagg_switch_base \
+nohup unbuffer taskset -c 1 build/tna_disagg_switch_base \
     "$(last_digits $cn_control_ip)" "$(last_digits $mn_control_ip)" \
     >> frontend.log 2>&1 &
 

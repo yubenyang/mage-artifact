@@ -87,8 +87,8 @@ function synchronize_debug () {
 	#scp compile_commands.json "$host_ssh:$host_root/compile_commands.json"
 
 	# Might need to copy in more of the GDB scripts as well. 
-	chronic scp "$(readlink vmlinux-gdb.py)" "$frontend_sshname:$host_root/vmlinux-gdb.py"
-	chronic scp vmlinux "$frontend_sshname:$host_root/vmlinux"
+	#chronic scp "$(readlink vmlinux-gdb.py)" "$frontend_sshname:$host_root/vmlinux-gdb.py"
+	#chronic scp vmlinux "$frontend_sshname:$host_root/vmlinux"
 }
 
 function indent () { 

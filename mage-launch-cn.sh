@@ -27,7 +27,7 @@ virt-install \
   --import \
   --memory "$VM_MEMORY",hugepages=yes \
   --numatune 0,mode=strict \
-  --vcpus 16,sockets=1,cores=16,threads=1,cpuset="$NODE0_CPUSET" \
+  --vcpus 22,sockets=1,cores=22,threads=1,cpuset="$NODE0_CPUSET" \
   --cpu host-passthrough \
   --machine q35 \
   --disk path="$IMAGE_PATH",format=qcow2,bus=virtio,cache=none,io=native \
