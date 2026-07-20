@@ -1,6 +1,10 @@
 .vscode
 *.code-workspace
 *.log
+*.svg
+*.perf.data
+*.perf.folded
+*.perf.report.txt
 mind_linux/test_programs/futex/server/nohup.out
 mind_internal_log/*
 compile_commands.json

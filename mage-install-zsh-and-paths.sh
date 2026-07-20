@@ -15,3 +15,8 @@ ssh mage-mn '$MIND_ROOT/../mage-install-path.sh mn'
 
 scp mage-kernel/mind_linux/include/disagg/cnthread_disagg.h mage-cn:/home/mage/mage-artifact/mage-kernel/mind_linux/include/disagg/cnthread_disagg.h
 scp mage-kernel/mind_linux/include/disagg/network_fit_disagg.h mage-cn:/home/mage/mage-artifact/mage-kernel/mind_linux/include/disagg/network_fit_disagg.h
+scp mage-kernel/apps/xsbench/test-one.zsh mage-cn:/home/mage/mage-artifact/mage-kernel/apps/xsbench/test-one.zsh
+scp mage-kernel/scripts/cn/generate-posttest-logs mage-cn:/home/mage/mage-artifact/mage-kernel/scripts/cn/generate-posttest-logs
+
+ssh mage-cn 'cd $MIND_ROOT/mind_linux/tools/perf/ && make -j$(nproc)'
+ssh mage-cn '[[ -d FlameGraph ]] || git clone https://github.com/brendangregg/FlameGraph.git'

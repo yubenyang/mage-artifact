@@ -42,3 +42,19 @@ kill $dmesg_pid
 wait $dmesg_pid
 
 sync $pre_log $post_log $pre_hwcounter_log $post_hwcounter_log
+
+perf_data="$log_root/$n_threads.perf.data"
+folded_stacks="$log_root/$n_threads.perf.folded"
+flamegraph_svg="$log_root/$n_threads.flamegraph.svg"
+perf_report="$log_root/$n_threads.perf.report.txt"
+if [[ -f $perf_data ]]; then
+	$MIND_ROOT/mind_linux/tools/perf/perf buildid-cache --add $MIND_ROOT/mind_linux/roce_modules/roce4disagg.ko
+	$MIND_ROOT/mind_linux/tools/perf/perf script -i $perf_data \
+		| /home/mage/FlameGraph/stackcollapse-perf.pl \
+		> $folded_stacks
+	/home/mage/FlameGraph/flamegraph.pl $folded_stacks \
+		> $flamegraph_svg
+	$MIND_ROOT/mind_linux/tools/perf/perf report -i $perf_data --stdio \
+		> $perf_report
+	sync $perf_data $folded_stacks $flamegraph_svg $perf_report
+fi
