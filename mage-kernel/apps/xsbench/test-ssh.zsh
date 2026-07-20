@@ -36,7 +36,7 @@ function run-test () {
 }
 
 local cn=4
-local fh=16
+local fh=26
 local bs=256
 
 # full 

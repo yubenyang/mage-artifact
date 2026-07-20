@@ -8,7 +8,7 @@ VM_NAME=mage-compute
 RDMA_NODEDEV=pci_0000_3b_00_0
 VM_MAC="${VM_MAC:-52:54:00:3b:00:50}"
 VM_IP="${VM_IP:-192.168.122.50}"
-NODE0_CPUSET="$(seq -s, 0 2 30)"
+NODE0_CPUSET="$(seq -s, 0 1 31)"
 
 if [[ ! -f "$IMAGE_PATH" ]]; then
   cp "$SOURCE_IMAGE" "$IMAGE_PATH"
@@ -27,7 +27,7 @@ virt-install \
   --import \
   --memory "$VM_MEMORY",hugepages=yes \
   --numatune 0,mode=strict \
-  --vcpus 22,sockets=1,cores=22,threads=1,cpuset="$NODE0_CPUSET" \
+  --vcpus 32,sockets=1,cores=32,threads=1,cpuset="$NODE0_CPUSET" \
   --cpu host-passthrough \
   --machine q35 \
   --disk path="$IMAGE_PATH",format=qcow2,bus=virtio,cache=none,io=native \

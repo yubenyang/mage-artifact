@@ -12,3 +12,6 @@ ssh mage-mn 'cd /home/mage/mage-artifact/ && git pull'
 
 ssh mage-cn '$MIND_ROOT/../mage-install-path.sh cn'
 ssh mage-mn '$MIND_ROOT/../mage-install-path.sh mn'
+
+scp mage-kernel/mind_linux/include/disagg/cnthread_disagg.h mage-cn:/home/mage/mage-artifact/mage-kernel/mind_linux/include/disagg/cnthread_disagg.h
+scp mage-kernel/mind_linux/include/disagg/network_fit_disagg.h mage-cn:/home/mage/mage-artifact/mage-kernel/mind_linux/include/disagg/network_fit_disagg.h

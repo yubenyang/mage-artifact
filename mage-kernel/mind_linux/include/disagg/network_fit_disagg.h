@@ -35,7 +35,7 @@
 
 #ifdef __CONTROLLER__
 // y: keep this in sync with `cnthread_disagg.h`!
-#define DISAGG_NUM_CORES 22
+#define DISAGG_NUM_CORES 32
 #endif
 
 // TODO: update these macros with the new correct numbers of QP, etc.
